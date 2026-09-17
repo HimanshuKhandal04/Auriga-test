@@ -15,7 +15,8 @@ async def lifespan(_: FastAPI):
 app = FastAPI(title="ParkFlow API", version="0.1.0", lifespan=lifespan)
 app.add_middleware(
 	CORSMiddleware,
-	allow_origins=["http://localhost:3000"],
+	allow_origins=["http://localhost:3000", "http://127.0.0.1:3000"],
+	allow_origin_regex=r"https://[a-z0-9-]+-3000\.app\.github\.dev",
 	allow_credentials=True,
 	allow_methods=["*"],
 	allow_headers=["*"],

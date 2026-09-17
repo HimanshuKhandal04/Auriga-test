@@ -68,7 +68,11 @@ def import_rate_card(
 
 def load_configured_rate_card() -> RateCard:
     if not settings.parking_rate_card_path:
-        raise RateCardError("No parking rate card is configured")
+        return RateCard(
+            first_hour_rate=Decimal(str(settings.parking_first_hour_rate)),
+            additional_hour_rate=Decimal(str(settings.parking_additional_hour_rate)),
+            daily_cap=Decimal(str(settings.parking_daily_cap)),
+        )
 
     path = Path(settings.parking_rate_card_path)
     try:
